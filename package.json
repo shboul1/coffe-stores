@@ -1,0 +1,26 @@
+{
+  "name": "coffe-store",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:es": "eslint --ext .js,.ts,.tsx .",
+    "lint:fix": "eslint --fix --ext .js,.ts,.tsx .",
+    "format": "prettier --check ./ .js .ts,.tsx",
+    "format:fix": "prettier --write ./ .js .ts,.tsx"
+  },
+  "dependencies": {
+    "next": "12.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.17.0",
+    "eslint-config-next": "12.1.6",
+    "eslint-config-prettier": "8.4.0",
+    "prettier": "2.5.1"
+  }
+}

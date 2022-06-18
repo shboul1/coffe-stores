@@ -1,0 +1,14 @@
+.cardWrapper {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+.title {
+    color: var(--text-purpule-dark);
+    margin: 10px 0;
+    margin-bottom: 20px;
+}
+.cardImage {
+    border-radius: 8px;
+    margin-top: 10px;
+}

@@ -1,0 +1,63 @@
+.containers {
+  margin-bottom: 1rem;
+}
+.title {
+  font-size: 3rem;
+  line-height: 1.25;
+}
+.title1 {
+  color: var(--text-white-100);
+}
+.title2 {
+  color: var(--text-purpule);
+}
+.paragraph {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  
+}
+.button {
+  margin: 1rem 0;
+  background-color: var(--text-purpule-dark);
+  color: var(--text-white-100);
+  padding: 1.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: var(--text-purpule-dark);
+}
+
+/** 
+  Breakpoints:
+  ------------
+  sm: min-width: 640px; //small device
+  md: min-width: 768px; // medium device
+  lg: min-width: 1024px; // large device
+  xl: min-width: 1280px; // extra large device
+  2xl: min-width: 1536px; // 2 x extra large device
+**/
+
+/* sm */
+@media (min-width: 640px) {
+}
+/* md */
+@media (min-width: 768px) {
+}
+/* Lg */
+@media (min-width: 1024px) {
+  .title {
+    font-size: 4rem;
+  }
+}
+/* XL */
+@media (min-width: 1280px) {
+  .title {
+    font-size: 4.5rem;
+  }
+}
+/* XXL */
+@media (min-width: 1536px) {
+
+}
