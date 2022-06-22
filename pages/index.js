@@ -1,3 +1,5 @@
+// React
+import { useEffect, useState } from 'react';
 // styles
 import styles from '../styles/Home.module.css';
 // components
@@ -7,20 +9,46 @@ import Card from '../components/card/Card';
 import Head from 'next/head';
 import Image from 'next/image';
 // data
-import coffeStoresData from '../data/coffe-stores-data.json';
+import { GetCoffeStores } from '../lib/GetCoffeStore';
+import useGetLocation from '../lib/useGetLocation';
 
-export async function getStaticProps(context) {
+// ------------------------------------------------
+
+export async function getStaticProps() {
+  const coffeStores = await GetCoffeStores();
   return {
     props: {
-      coffeStores: coffeStoresData,
+      coffeStores,
     },
   };
 }
+
+// ------------------------------------------------
+
 export default function Home(props) {
+  const { location, handleGetLocation, errorMsg, loading } = useGetLocation();
+  const [coffeStoresByLocation, setCoffeStoresByLocation] = useState([]);
   const { coffeStores } = props;
+
   const handleBannerBtnClick = () => {
-    console.log('clicked');
+    handleGetLocation();
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      if (location) {
+        try {
+          const ll = `${location.latt},${location.long}`;
+          const coffeStores = await GetCoffeStores(ll);
+          setCoffeStoresByLocation(coffeStores);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+    fetchData();
+  }, [location]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -29,14 +57,26 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Banner onBannerBtnClick={handleBannerBtnClick} />
+        <Banner onBannerBtnClick={handleBannerBtnClick} loading={loading} />
         <div className={styles.heroImage}>
           <Image src="/static/hero-image.png" width={700} height={400} />
         </div>
-        <h2>Test</h2>
+
+        {coffeStoresByLocation.length > 0 && (
+          <>
+            <h2 className={styles.mainTitle}>Nerby Stores</h2>
+            <div className={styles.cardLayout}>
+              {coffeStoresByLocation.map((coffeStore, idx) => (
+                <Card key={idx} row={coffeStore} />
+              ))}
+            </div>
+          </>
+        )}
+
+        <h2 className={styles.mainTitle}>Amman Stores</h2>
         <div className={styles.cardLayout}>
-          {coffeStores.map((coffeStore) => (
-            <Card key={coffeStore.id} row={coffeStore} />
+          {coffeStores.map((coffeStore, idx) => (
+            <Card key={idx} row={coffeStore} />
           ))}
         </div>
       </main>

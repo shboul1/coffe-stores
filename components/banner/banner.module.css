@@ -14,7 +14,6 @@
 .paragraph {
   font-size: 1.2rem;
   line-height: 2rem;
-  
 }
 .button {
   margin: 1rem 0;
@@ -59,5 +58,4 @@
 }
 /* XXL */
 @media (min-width: 1536px) {
-
 }

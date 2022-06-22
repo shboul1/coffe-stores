@@ -1,0 +1,80 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 10rem;
+}
+.coffeStoreWrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 2rem;
+  column-gap: 3rem;
+}
+.title {
+  margin: 2rem 0;
+  letter-spacing: 1px;
+  font-size: 1.75rem;
+}
+.image {
+  border-radius: 8px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+.coffeInfo {
+  min-height: 300px;
+  padding: 2rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+.info {
+  padding-left: 20px;
+  line-height: 2.2;
+  font-size: 1rem;
+  color: var(--text-purpule);
+  font-weight: bold;
+}
+.voteBtn {
+  background-color: var(--text-purpule-dark);
+  color: var(--text-white-100);
+  border: none;
+  padding: 1rem;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 50px;
+  cursor: pointer;
+  place-self: end start;
+}
+.iconWrapper {
+  display: flex;
+  align-items: center;
+}
+.icon {
+  fill: #fff;
+}
+@media (min-width: 640px) {
+  .coffeStoreWrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .info {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .coffeStoreWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .info {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .info {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+}
