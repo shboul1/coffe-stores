@@ -40,7 +40,7 @@ export default function CoffeeStore({ coffeStore }) {
       </Link>
       <h2 className={styles.title}>{name}</h2>
       <div className={styles.coffeStoreWrapper}>
-        <Image alt="img" className={styles.image} src={imgURL} width={600} height={360} alt={name} />
+        <Image className={styles.image} src={imgURL} width={600} height={360} alt={name} />
         <div className={`${styles.coffeInfo} glass`}>
           <div className={styles.iconWrapper}>
             <Image alt="img" className={styles.icon} src="/static/icons/location.svg" width="24" height="24" />
