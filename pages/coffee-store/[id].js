@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import CoffeStoresData from '../../data/coffe-stores-data.json';
 import styles from './coffe-store.module.css';
 import { GetCoffeStores } from '../../lib/GetCoffeStore';
 export async function getStaticProps(StaticProps) {
@@ -29,9 +28,7 @@ export async function getStaticPaths() {
 
 export default function CoffeeStore({ coffeStore }) {
   const router = useRouter();
-  const {
-    query: { id },
-  } = router;
+
   if (router.isFallback) {
     return 'Loading ...';
   }
@@ -43,14 +40,14 @@ export default function CoffeeStore({ coffeStore }) {
       </Link>
       <h2 className={styles.title}>{name}</h2>
       <div className={styles.coffeStoreWrapper}>
-        <Image className={styles.image} src={imgURL} width={600} height={360} alt={name} />
+        <Image alt="img" className={styles.image} src={imgURL} width={600} height={360} alt={name} />
         <div className={`${styles.coffeInfo} glass`}>
           <div className={styles.iconWrapper}>
-            <Image className={styles.icon} src="/static/icons/location.svg" width="24" height="24" />
+            <Image alt="img" className={styles.icon} src="/static/icons/location.svg" width="24" height="24" />
             <div className={styles.info}>{location.address}</div>
           </div>
           <div className={styles.iconWrapper}>
-            <Image className={styles.icon} src="/static/icons/star.svg" width="24" height="24" />
+            <Image alt="img" className={styles.icon} src="/static/icons/star.svg" width="24" height="24" />
             <div className={styles.info}>{location.postcode}</div>
           </div>
 

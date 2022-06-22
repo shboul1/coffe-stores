@@ -59,7 +59,7 @@ export default function Home(props) {
       <main className={styles.main}>
         <Banner onBannerBtnClick={handleBannerBtnClick} loading={loading} />
         <div className={styles.heroImage}>
-          <Image src="/static/hero-image.png" width={700} height={400} />
+          <Image src="/static/hero-image.png" alt="mainImg" width={700} height={400} />
         </div>
 
         {coffeStoresByLocation.length > 0 && (

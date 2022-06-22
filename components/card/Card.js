@@ -11,7 +11,7 @@ export default function Card({ row }) {
       <a>
         <div className={`glass ${styles.cardWrapper}`}>
           <h2 className={styles.title}>{name}</h2>
-          <Image className={styles.cardImage} src={imgURL} width={290} height={200} />
+          <Image className={styles.cardImage} src={imgURL} alt={'cardImg'} width={290} height={200} />
         </div>
       </a>
     </Link>
