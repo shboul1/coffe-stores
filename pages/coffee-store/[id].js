@@ -1,20 +1,27 @@
+// React
+import { useContext, useEffect, useState } from 'react';
 // next
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from './coffe-store.module.css';
 import { GetCoffeStores } from '../../lib/GetCoffeStore';
+import { SotresContext } from '../_app';
+
+// ------------------------------------------------
 export async function getStaticProps(StaticProps) {
   const {
     params: { id },
   } = StaticProps;
   const coffeStores = await GetCoffeStores();
+  const CoffeStoresById = coffeStores.find((coffeStore) => coffeStore.fsq_id.toString() == id);
   return {
     props: {
-      coffeStore: coffeStores.find((coffeStore) => coffeStore.fsq_id.toString() == id),
+      coffeStore: CoffeStoresById ? CoffeStoresById : {},
     },
   };
 }
+// ------------------------------------------------
 
 export async function getStaticPaths() {
   const coffeStores = await GetCoffeStores();
@@ -26,13 +33,32 @@ export async function getStaticPaths() {
   };
 }
 
-export default function CoffeeStore({ coffeStore }) {
+// ------------------------------------------------
+
+export default function CoffeeStore(props) {
+  const [coffeStore, setCoffeStore] = useState(props.coffeStore);
+  const { state } = useContext(SotresContext);
+  console.log(state, 'GG');
   const router = useRouter();
+  const {
+    query: { id },
+  } = router;
 
   if (router.isFallback) {
     return 'Loading ...';
   }
+
+  useEffect(() => {
+    if (!Object.keys(props.coffeStore).length) {
+      if (state.coffeStores.length > 0) {
+        const CoffeStoresById = state.coffeStores.find((coffeStore) => coffeStore.fsq_id.toString() == id);
+        setCoffeStore(CoffeStoresById);
+      }
+    }
+  }, [id]);
+
   const { name, location, imgURL } = coffeStore;
+
   return (
     <div className={styles.container}>
       <Link href={'/'}>

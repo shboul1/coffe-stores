@@ -1,5 +1,5 @@
 // React
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 // styles
 import styles from '../styles/Home.module.css';
 // components
@@ -11,7 +11,8 @@ import Image from 'next/image';
 // data
 import { GetCoffeStores } from '../lib/GetCoffeStore';
 import useGetLocation from '../lib/useGetLocation';
-
+// Context
+import { SotresContext, ACTION_TYPES } from './_app';
 // ------------------------------------------------
 
 export async function getStaticProps() {
@@ -26,8 +27,8 @@ export async function getStaticProps() {
 // ------------------------------------------------
 
 export default function Home(props) {
-  const { location, handleGetLocation, errorMsg, loading } = useGetLocation();
-  const [coffeStoresByLocation, setCoffeStoresByLocation] = useState([]);
+  const { dispatch, state } = useContext(SotresContext);
+  const { handleGetLocation, loading } = useGetLocation();
   const { coffeStores } = props;
 
   const handleBannerBtnClick = () => {
@@ -36,18 +37,20 @@ export default function Home(props) {
 
   useEffect(() => {
     async function fetchData() {
-      if (location) {
+      if (state.lattlong) {
         try {
-          const ll = `${location.latt},${location.long}`;
-          const coffeStores = await GetCoffeStores(ll);
-          setCoffeStoresByLocation(coffeStores);
+          const coffeStores = await GetCoffeStores(state.lattlong);
+          dispatch({
+            type: ACTION_TYPES.SET_COFFE_STORES,
+            payload: coffeStores,
+          });
         } catch (error) {
           console.log(error);
         }
       }
     }
     fetchData();
-  }, [location]);
+  }, [state.lattlong]);
 
   return (
     <div className={styles.container}>
@@ -62,11 +65,11 @@ export default function Home(props) {
           <Image src="/static/hero-image.png" alt="mainImg" width={700} height={400} />
         </div>
 
-        {coffeStoresByLocation.length > 0 && (
+        {state.coffeStores.length > 0 && (
           <>
             <h2 className={styles.mainTitle}>Nerby Stores</h2>
             <div className={styles.cardLayout}>
-              {coffeStoresByLocation.map((coffeStore, idx) => (
+              {state.coffeStores.map((coffeStore, idx) => (
                 <Card key={idx} row={coffeStore} />
               ))}
             </div>
