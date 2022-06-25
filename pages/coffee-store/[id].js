@@ -36,20 +36,21 @@ export async function getStaticPaths() {
 // ------------------------------------------------
 
 export default function CoffeeStore(props) {
+  const router = useRouter();
+  if (router.isFallback) {
+    return 'Loading ...';
+  }
   const [coffeStore, setCoffeStore] = useState(props.coffeStore);
   const { state } = useContext(SotresContext);
-  console.log(state, 'GG');
-  const router = useRouter();
   const {
     query: { id },
   } = router;
 
-  if (router.isFallback) {
-    return 'Loading ...';
-  }
-
+  const isEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  };
   useEffect(() => {
-    if (!Object.keys(props.coffeStore).length) {
+    if (isEmpty(props.coffeStore)) {
       if (state.coffeStores.length > 0) {
         const CoffeStoresById = state.coffeStores.find((coffeStore) => coffeStore.fsq_id.toString() == id);
         setCoffeStore(CoffeStoresById);
@@ -64,17 +65,17 @@ export default function CoffeeStore(props) {
       <Link href={'/'}>
         <a>← Back To Home</a>
       </Link>
-      <h2 className={styles.title}>{name}</h2>
+      <h2 className={styles.title}>{name || ''}</h2>
       <div className={styles.coffeStoreWrapper}>
-        <Image className={styles.image} src={imgURL} width={600} height={360} alt={name} />
+        <Image className={styles.image} src={imgURL || '/static/background.png'} width={600} height={360} alt={name} />
         <div className={`${styles.coffeInfo} glass`}>
           <div className={styles.iconWrapper}>
             <Image alt="img" className={styles.icon} src="/static/icons/location.svg" width="24" height="24" />
-            <div className={styles.info}>{location.address}</div>
+            <div className={styles.info}>{location?.address}</div>
           </div>
           <div className={styles.iconWrapper}>
             <Image alt="img" className={styles.icon} src="/static/icons/star.svg" width="24" height="24" />
-            <div className={styles.info}>{location.postcode}</div>
+            <div className={styles.info}>{location?.postcode}</div>
           </div>
 
           <button className={styles.voteBtn}>Up Vote!</button>
