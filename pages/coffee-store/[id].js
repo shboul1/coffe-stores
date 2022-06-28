@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from './coffe-store.module.css';
 import { GetCoffeStores } from '../../lib/GetCoffeStore';
-import { SotresContext } from '../_app';
+import { SotresContext } from '../../context/store-context';
 
 // ------------------------------------------------
 export async function getStaticProps(StaticProps) {

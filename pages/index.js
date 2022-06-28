@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { GetCoffeStores } from '../lib/GetCoffeStore';
 import useGetLocation from '../lib/useGetLocation';
 // Context
-import { SotresContext, ACTION_TYPES } from './_app';
+import { SotresContext, ACTION_TYPES } from '../context/store-context';
 // ------------------------------------------------
 
 export async function getStaticProps() {
